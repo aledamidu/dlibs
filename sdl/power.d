@@ -1,0 +1,25 @@
+module libs.sdl.power;
+extern (C):
+@nogc nothrow:
+
+enum SDL_PowerState
+{
+    SDL_POWERSTATE_ERROR = -1,
+    SDL_POWERSTATE_UNKNOWN = 0,
+    SDL_POWERSTATE_ON_BATTERY = 1,
+    SDL_POWERSTATE_NO_BATTERY = 2,
+    SDL_POWERSTATE_CHARGING = 3,
+    SDL_POWERSTATE_CHARGED = 4
+}
+
+alias SDL_POWERSTATE_ERROR = SDL_PowerState.SDL_POWERSTATE_ERROR;
+alias SDL_POWERSTATE_UNKNOWN = SDL_PowerState.SDL_POWERSTATE_UNKNOWN;
+alias SDL_POWERSTATE_ON_BATTERY = SDL_PowerState.SDL_POWERSTATE_ON_BATTERY;
+alias SDL_POWERSTATE_NO_BATTERY = SDL_PowerState.SDL_POWERSTATE_NO_BATTERY;
+alias SDL_POWERSTATE_CHARGING = SDL_PowerState.SDL_POWERSTATE_CHARGING;
+alias SDL_POWERSTATE_CHARGED = SDL_PowerState.SDL_POWERSTATE_CHARGED;
+
+pragma(mangle, "SDL_GetPowerInfo")
+SDL_PowerState sdlGetPowerInfo(int* seconds, int* percent);
+
+alias SDL_GetPowerInfo = sdlGetPowerInfo;
