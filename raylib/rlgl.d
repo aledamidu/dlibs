@@ -2,11 +2,6 @@ module libs.raylib.rlgl;
 
 import libs.raylib.raylib : Matrix;
 
-// Generated from rlgl.h.
-// Do not edit by hand; run tools/generate_rlgl.ts instead.
-//
-// rlgl functions already use the rl prefix, so their C names are kept as-is.
-
 extern (C):
 @nogc nothrow:
 
