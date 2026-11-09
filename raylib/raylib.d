@@ -13,29 +13,25 @@ import core.stdc.stdarg : va_list;
 extern (C):
 @nogc nothrow:
 
-struct Vector2
-{
+struct Vector2 {
     float x;
     float y;
 }
 
-struct Vector3
-{
+struct Vector3 {
     float x;
     float y;
     float z;
 }
 
-struct Vector4
-{
+struct Vector4 {
     float x;
     float y;
     float z;
     float w;
 }
 
-struct Matrix
-{
+struct Matrix {
     float m0;
     float m4;
     float m8;
@@ -54,24 +50,21 @@ struct Matrix
     float m15;
 }
 
-struct Color
-{
+struct Color {
     ubyte r;
     ubyte g;
     ubyte b;
     ubyte a;
 }
 
-struct Rectangle
-{
+struct Rectangle {
     float x;
     float y;
     float width;
     float height;
 }
 
-struct Image
-{
+struct Image {
     void* data;
     int width;
     int height;
@@ -79,8 +72,7 @@ struct Image
     int format;
 }
 
-struct Texture
-{
+struct Texture {
     uint id;
     int width;
     int height;
@@ -88,15 +80,13 @@ struct Texture
     int format;
 }
 
-struct RenderTexture
-{
+struct RenderTexture {
     uint id;
     Texture texture;
     Texture depth;
 }
 
-struct NPatchInfo
-{
+struct NPatchInfo {
     Rectangle source;
     int left;
     int top;
@@ -105,8 +95,7 @@ struct NPatchInfo
     int layout;
 }
 
-struct GlyphInfo
-{
+struct GlyphInfo {
     int value;
     int offsetX;
     int offsetY;
@@ -114,8 +103,7 @@ struct GlyphInfo
     Image image;
 }
 
-struct Font
-{
+struct Font {
     int baseSize;
     int glyphCount;
     int glyphPadding;
@@ -124,8 +112,7 @@ struct Font
     GlyphInfo* glyphs;
 }
 
-struct Camera3D
-{
+struct Camera3D {
     Vector3 position;
     Vector3 target;
     Vector3 up;
@@ -133,16 +120,14 @@ struct Camera3D
     int projection;
 }
 
-struct Camera2D
-{
+struct Camera2D {
     Vector2 offset;
     Vector2 target;
     float rotation;
     float zoom;
 }
 
-struct Mesh
-{
+struct Mesh {
     int vertexCount;
     int triangleCount;
     float* vertices;
@@ -161,48 +146,41 @@ struct Mesh
     uint* vboId;
 }
 
-struct Shader
-{
+struct Shader {
     uint id;
     int* locs;
 }
 
-struct MaterialMap
-{
+struct MaterialMap {
     Texture2D texture;
     Color color;
     float value;
 }
 
-struct Material
-{
+struct Material {
     Shader shader;
     MaterialMap* maps;
     float[4] params;
 }
 
-struct Transform
-{
+struct Transform {
     Vector3 translation;
     Quaternion rotation;
     Vector3 scale;
 }
 
-struct BoneInfo
-{
+struct BoneInfo {
     char[32] name;
     int parent;
 }
 
-struct ModelSkeleton
-{
+struct ModelSkeleton {
     uint boneCount;
     BoneInfo* bones;
     ModelAnimPose bindPose;
 }
 
-struct Model
-{
+struct Model {
     Matrix transform;
     int meshCount;
     int materialCount;
@@ -214,36 +192,31 @@ struct Model
     Matrix* boneMatrices;
 }
 
-struct ModelAnimation
-{
+struct ModelAnimation {
     char[32] name;
     uint boneCount;
     int keyframeCount;
     ModelAnimPose* keyframePoses;
 }
 
-struct Ray
-{
+struct Ray {
     Vector3 position;
     Vector3 direction;
 }
 
-struct RayCollision
-{
+struct RayCollision {
     bool hit;
     float distance;
     Vector3 point;
     Vector3 normal;
 }
 
-struct BoundingBox
-{
+struct BoundingBox {
     Vector3 min;
     Vector3 max;
 }
 
-struct Wave
-{
+struct Wave {
     uint frameCount;
     uint sampleRate;
     uint sampleSize;
@@ -251,23 +224,20 @@ struct Wave
     void* data;
 }
 
-struct AudioStream
-{
-    rAudioBuffer* buffer;
-    rAudioProcessor* processor;
+struct AudioStream {
+    RAudioBuffer* buffer;
+    RAudioProcessor* processor;
     uint sampleRate;
     uint sampleSize;
     uint channels;
 }
 
-struct Sound
-{
+struct Sound {
     AudioStream stream;
     uint frameCount;
 }
 
-struct Music
-{
+struct Music {
     AudioStream stream;
     uint frameCount;
     bool looping;
@@ -275,8 +245,7 @@ struct Music
     void* ctxData;
 }
 
-struct VrDeviceInfo
-{
+struct VrDeviceInfo {
     int hResolution;
     int vResolution;
     float hScreenSize;
@@ -288,8 +257,7 @@ struct VrDeviceInfo
     float[4] chromaAbCorrection;
 }
 
-struct VrStereoConfig
-{
+struct VrStereoConfig {
     Matrix[2] projection;
     Matrix[2] viewOffset;
     float[2] leftLensCenter;
@@ -300,29 +268,26 @@ struct VrStereoConfig
     float[2] scaleIn;
 }
 
-struct FilePathList
-{
+struct FilePathList {
     uint count;
     char** paths;
 }
 
-struct AutomationEvent
-{
+struct AutomationEvent {
     uint frame;
     uint type;
     int[4] params;
 }
 
-struct AutomationEventList
-{
+struct AutomationEventList {
     uint capacity;
     uint count;
     AutomationEvent* events;
 }
 
-struct rAudioBuffer;
+struct RAudioBuffer;
 
-struct rAudioProcessor;
+struct RAudioProcessor;
 
 alias Quaternion = Vector4;
 
@@ -336,17 +301,17 @@ alias Camera = Camera3D;
 
 alias ModelAnimPose = Transform*;
 
-alias TraceLogCallback = extern(C) void function(int logLevel, const(char)* text, va_list args) @nogc nothrow;
+alias TraceLogCallback = extern (C) void function(int logLevel, const(char)* text, va_list args) @nogc nothrow;
 
-alias LoadFileDataCallback = extern(C) ubyte* function(const(char)* fileName, int* dataSize) @nogc nothrow;
+alias LoadFileDataCallback = extern (C) ubyte* function(const(char)* fileName, int* dataSize) @nogc nothrow;
 
-alias SaveFileDataCallback = extern(C) bool function(const(char)* fileName, const(void)* data, int dataSize) @nogc nothrow;
+alias SaveFileDataCallback = extern (C) bool function(const(char)* fileName, const(void)* data, int dataSize) @nogc nothrow;
 
-alias LoadFileTextCallback = extern(C) char* function(const(char)* fileName) @nogc nothrow;
+alias LoadFileTextCallback = extern (C) char* function(const(char)* fileName) @nogc nothrow;
 
-alias SaveFileTextCallback = extern(C) bool function(const(char)* fileName, const(char)* text) @nogc nothrow;
+alias SaveFileTextCallback = extern (C) bool function(const(char)* fileName, const(char)* text) @nogc nothrow;
 
-alias AudioCallback = extern(C) void function(void* bufferData, uint frames) @nogc nothrow;
+alias AudioCallback = extern (C) void function(void* bufferData, uint frames) @nogc nothrow;
 
 enum int RAYLIB_VERSION_MAJOR = 6;
 enum int RAYLIB_VERSION_MINOR = 5;
@@ -389,8 +354,7 @@ alias MATERIAL_MAP_SPECULAR = MaterialMapIndex.MATERIAL_MAP_METALNESS;
 alias SHADER_LOC_MAP_DIFFUSE = ShaderLocationIndex.SHADER_LOC_MAP_ALBEDO;
 alias SHADER_LOC_MAP_SPECULAR = ShaderLocationIndex.SHADER_LOC_MAP_METALNESS;
 
-enum ConfigFlags
-{
+enum ConfigFlags {
     FLAG_VSYNC_HINT = 64,
     FLAG_FULLSCREEN_MODE = 2,
     FLAG_WINDOW_RESIZABLE = 4,
@@ -403,10 +367,10 @@ enum ConfigFlags
     FLAG_WINDOW_ALWAYS_RUN = 256,
     FLAG_WINDOW_TRANSPARENT = 16,
     FLAG_WINDOW_HIGHDPI = 8192,
-    FLAG_WINDOW_MOUSE_PASSTHROUGH = 16384,
-    FLAG_BORDERLESS_WINDOWED_MODE = 32768,
+    FLAG_WINDOW_MOUSE_PASSTHROUGH = 16_384,
+    FLAG_BORDERLESS_WINDOWED_MODE = 32_768,
     FLAG_MSAA_4X_HINT = 32,
-    FLAG_INTERLACED_HINT = 65536,
+    FLAG_INTERLACED_HINT = 65_536,
 }
 
 alias FLAG_VSYNC_HINT = ConfigFlags.FLAG_VSYNC_HINT;
@@ -426,8 +390,7 @@ alias FLAG_BORDERLESS_WINDOWED_MODE = ConfigFlags.FLAG_BORDERLESS_WINDOWED_MODE;
 alias FLAG_MSAA_4X_HINT = ConfigFlags.FLAG_MSAA_4X_HINT;
 alias FLAG_INTERLACED_HINT = ConfigFlags.FLAG_INTERLACED_HINT;
 
-enum TraceLogLevel
-{
+enum TraceLogLevel {
     LOG_ALL = 0,
     LOG_TRACE = 1,
     LOG_DEBUG = 2,
@@ -447,8 +410,7 @@ alias LOG_ERROR = TraceLogLevel.LOG_ERROR;
 alias LOG_FATAL = TraceLogLevel.LOG_FATAL;
 alias LOG_NONE = TraceLogLevel.LOG_NONE;
 
-enum KeyboardKey
-{
+enum KeyboardKey {
     KEY_NULL = 0,
     KEY_APOSTROPHE = 39,
     KEY_COMMA = 44,
@@ -672,8 +634,7 @@ alias KEY_MENU = KeyboardKey.KEY_MENU;
 alias KEY_VOLUME_UP = KeyboardKey.KEY_VOLUME_UP;
 alias KEY_VOLUME_DOWN = KeyboardKey.KEY_VOLUME_DOWN;
 
-enum MouseButton
-{
+enum MouseButton {
     MOUSE_BUTTON_LEFT = 0,
     MOUSE_BUTTON_RIGHT = 1,
     MOUSE_BUTTON_MIDDLE = 2,
@@ -691,8 +652,7 @@ alias MOUSE_BUTTON_EXTRA = MouseButton.MOUSE_BUTTON_EXTRA;
 alias MOUSE_BUTTON_FORWARD = MouseButton.MOUSE_BUTTON_FORWARD;
 alias MOUSE_BUTTON_BACK = MouseButton.MOUSE_BUTTON_BACK;
 
-enum MouseCursor
-{
+enum MouseCursor {
     MOUSE_CURSOR_DEFAULT = 0,
     MOUSE_CURSOR_ARROW = 1,
     MOUSE_CURSOR_IBEAM = 2,
@@ -718,8 +678,7 @@ alias MOUSE_CURSOR_RESIZE_NESW = MouseCursor.MOUSE_CURSOR_RESIZE_NESW;
 alias MOUSE_CURSOR_RESIZE_ALL = MouseCursor.MOUSE_CURSOR_RESIZE_ALL;
 alias MOUSE_CURSOR_NOT_ALLOWED = MouseCursor.MOUSE_CURSOR_NOT_ALLOWED;
 
-enum GamepadButton
-{
+enum GamepadButton {
     GAMEPAD_BUTTON_UNKNOWN = 0,
     GAMEPAD_BUTTON_LEFT_FACE_UP = 1,
     GAMEPAD_BUTTON_LEFT_FACE_RIGHT = 2,
@@ -759,8 +718,7 @@ alias GAMEPAD_BUTTON_MIDDLE_RIGHT = GamepadButton.GAMEPAD_BUTTON_MIDDLE_RIGHT;
 alias GAMEPAD_BUTTON_LEFT_THUMB = GamepadButton.GAMEPAD_BUTTON_LEFT_THUMB;
 alias GAMEPAD_BUTTON_RIGHT_THUMB = GamepadButton.GAMEPAD_BUTTON_RIGHT_THUMB;
 
-enum GamepadAxis
-{
+enum GamepadAxis {
     GAMEPAD_AXIS_LEFT_X = 0,
     GAMEPAD_AXIS_LEFT_Y = 1,
     GAMEPAD_AXIS_RIGHT_X = 2,
@@ -776,8 +734,7 @@ alias GAMEPAD_AXIS_RIGHT_Y = GamepadAxis.GAMEPAD_AXIS_RIGHT_Y;
 alias GAMEPAD_AXIS_LEFT_TRIGGER = GamepadAxis.GAMEPAD_AXIS_LEFT_TRIGGER;
 alias GAMEPAD_AXIS_RIGHT_TRIGGER = GamepadAxis.GAMEPAD_AXIS_RIGHT_TRIGGER;
 
-enum MaterialMapIndex
-{
+enum MaterialMapIndex {
     MATERIAL_MAP_ALBEDO = 0,
     MATERIAL_MAP_METALNESS = 1,
     MATERIAL_MAP_NORMAL = 2,
@@ -803,8 +760,7 @@ alias MATERIAL_MAP_IRRADIANCE = MaterialMapIndex.MATERIAL_MAP_IRRADIANCE;
 alias MATERIAL_MAP_PREFILTER = MaterialMapIndex.MATERIAL_MAP_PREFILTER;
 alias MATERIAL_MAP_BRDF = MaterialMapIndex.MATERIAL_MAP_BRDF;
 
-enum ShaderLocationIndex
-{
+enum ShaderLocationIndex {
     SHADER_LOC_VERTEX_POSITION = 0,
     SHADER_LOC_VERTEX_TEXCOORD01 = 1,
     SHADER_LOC_VERTEX_TEXCOORD02 = 2,
@@ -868,8 +824,7 @@ alias SHADER_LOC_VERTEX_BONEWEIGHTS = ShaderLocationIndex.SHADER_LOC_VERTEX_BONE
 alias SHADER_LOC_MATRIX_BONETRANSFORMS = ShaderLocationIndex.SHADER_LOC_MATRIX_BONETRANSFORMS;
 alias SHADER_LOC_VERTEX_INSTANCETRANSFORM = ShaderLocationIndex.SHADER_LOC_VERTEX_INSTANCETRANSFORM;
 
-enum ShaderUniformDataType
-{
+enum ShaderUniformDataType {
     SHADER_UNIFORM_FLOAT = 0,
     SHADER_UNIFORM_VEC2 = 1,
     SHADER_UNIFORM_VEC3 = 2,
@@ -899,8 +854,7 @@ alias SHADER_UNIFORM_UIVEC3 = ShaderUniformDataType.SHADER_UNIFORM_UIVEC3;
 alias SHADER_UNIFORM_UIVEC4 = ShaderUniformDataType.SHADER_UNIFORM_UIVEC4;
 alias SHADER_UNIFORM_SAMPLER2D = ShaderUniformDataType.SHADER_UNIFORM_SAMPLER2D;
 
-enum ShaderAttributeDataType
-{
+enum ShaderAttributeDataType {
     SHADER_ATTRIB_FLOAT = 0,
     SHADER_ATTRIB_VEC2 = 1,
     SHADER_ATTRIB_VEC3 = 2,
@@ -912,8 +866,7 @@ alias SHADER_ATTRIB_VEC2 = ShaderAttributeDataType.SHADER_ATTRIB_VEC2;
 alias SHADER_ATTRIB_VEC3 = ShaderAttributeDataType.SHADER_ATTRIB_VEC3;
 alias SHADER_ATTRIB_VEC4 = ShaderAttributeDataType.SHADER_ATTRIB_VEC4;
 
-enum PixelFormat
-{
+enum PixelFormat {
     PIXELFORMAT_UNCOMPRESSED_GRAYSCALE = 1,
     PIXELFORMAT_UNCOMPRESSED_GRAY_ALPHA = 2,
     PIXELFORMAT_UNCOMPRESSED_R5G6B5 = 3,
@@ -965,8 +918,7 @@ alias PIXELFORMAT_COMPRESSED_PVRT_RGBA = PixelFormat.PIXELFORMAT_COMPRESSED_PVRT
 alias PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA = PixelFormat.PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA;
 alias PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA = PixelFormat.PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA;
 
-enum TextureFilter
-{
+enum TextureFilter {
     TEXTURE_FILTER_POINT = 0,
     TEXTURE_FILTER_BILINEAR = 1,
     TEXTURE_FILTER_TRILINEAR = 2,
@@ -982,8 +934,7 @@ alias TEXTURE_FILTER_ANISOTROPIC_4X = TextureFilter.TEXTURE_FILTER_ANISOTROPIC_4
 alias TEXTURE_FILTER_ANISOTROPIC_8X = TextureFilter.TEXTURE_FILTER_ANISOTROPIC_8X;
 alias TEXTURE_FILTER_ANISOTROPIC_16X = TextureFilter.TEXTURE_FILTER_ANISOTROPIC_16X;
 
-enum TextureWrap
-{
+enum TextureWrap {
     TEXTURE_WRAP_REPEAT = 0,
     TEXTURE_WRAP_CLAMP = 1,
     TEXTURE_WRAP_MIRROR_REPEAT = 2,
@@ -995,8 +946,7 @@ alias TEXTURE_WRAP_CLAMP = TextureWrap.TEXTURE_WRAP_CLAMP;
 alias TEXTURE_WRAP_MIRROR_REPEAT = TextureWrap.TEXTURE_WRAP_MIRROR_REPEAT;
 alias TEXTURE_WRAP_MIRROR_CLAMP = TextureWrap.TEXTURE_WRAP_MIRROR_CLAMP;
 
-enum CubemapLayout
-{
+enum CubemapLayout {
     CUBEMAP_LAYOUT_AUTO_DETECT = 0,
     CUBEMAP_LAYOUT_LINE_VERTICAL = 1,
     CUBEMAP_LAYOUT_LINE_HORIZONTAL = 2,
@@ -1010,8 +960,7 @@ alias CUBEMAP_LAYOUT_LINE_HORIZONTAL = CubemapLayout.CUBEMAP_LAYOUT_LINE_HORIZON
 alias CUBEMAP_LAYOUT_CROSS_THREE_BY_FOUR = CubemapLayout.CUBEMAP_LAYOUT_CROSS_THREE_BY_FOUR;
 alias CUBEMAP_LAYOUT_CROSS_FOUR_BY_THREE = CubemapLayout.CUBEMAP_LAYOUT_CROSS_FOUR_BY_THREE;
 
-enum FontType
-{
+enum FontType {
     FONT_DEFAULT = 0,
     FONT_BITMAP = 1,
     FONT_SDF = 2,
@@ -1021,8 +970,7 @@ alias FONT_DEFAULT = FontType.FONT_DEFAULT;
 alias FONT_BITMAP = FontType.FONT_BITMAP;
 alias FONT_SDF = FontType.FONT_SDF;
 
-enum BlendMode
-{
+enum BlendMode {
     BLEND_ALPHA = 0,
     BLEND_ADDITIVE = 1,
     BLEND_MULTIPLIED = 2,
@@ -1042,8 +990,7 @@ alias BLEND_ALPHA_PREMULTIPLY = BlendMode.BLEND_ALPHA_PREMULTIPLY;
 alias BLEND_CUSTOM = BlendMode.BLEND_CUSTOM;
 alias BLEND_CUSTOM_SEPARATE = BlendMode.BLEND_CUSTOM_SEPARATE;
 
-enum Gesture
-{
+enum Gesture {
     GESTURE_NONE = 0,
     GESTURE_TAP = 1,
     GESTURE_DOUBLETAP = 2,
@@ -1069,8 +1016,7 @@ alias GESTURE_SWIPE_DOWN = Gesture.GESTURE_SWIPE_DOWN;
 alias GESTURE_PINCH_IN = Gesture.GESTURE_PINCH_IN;
 alias GESTURE_PINCH_OUT = Gesture.GESTURE_PINCH_OUT;
 
-enum CameraMode
-{
+enum CameraMode {
     CAMERA_CUSTOM = 0,
     CAMERA_FREE = 1,
     CAMERA_ORBITAL = 2,
@@ -1084,8 +1030,7 @@ alias CAMERA_ORBITAL = CameraMode.CAMERA_ORBITAL;
 alias CAMERA_FIRST_PERSON = CameraMode.CAMERA_FIRST_PERSON;
 alias CAMERA_THIRD_PERSON = CameraMode.CAMERA_THIRD_PERSON;
 
-enum CameraProjection
-{
+enum CameraProjection {
     CAMERA_PERSPECTIVE = 0,
     CAMERA_ORTHOGRAPHIC = 1,
 }
@@ -1093,8 +1038,7 @@ enum CameraProjection
 alias CAMERA_PERSPECTIVE = CameraProjection.CAMERA_PERSPECTIVE;
 alias CAMERA_ORTHOGRAPHIC = CameraProjection.CAMERA_ORTHOGRAPHIC;
 
-enum NPatchLayout
-{
+enum NPatchLayout {
     NPATCH_NINE_PATCH = 0,
     NPATCH_THREE_PATCH_VERTICAL = 1,
     NPATCH_THREE_PATCH_HORIZONTAL = 2,
@@ -3230,7 +3174,8 @@ Font rlLoadFontFromImage(Image image, Color key, int firstChar);
 alias LoadFontFromImage = rlLoadFontFromImage;
 
 pragma(mangle, "LoadFontFromMemory")
-Font rlLoadFontFromMemory(const(char)* fileType, const(ubyte)* fileData, int dataSize, int fontSize, const(int)* codepoints, int codepointCount);
+Font rlLoadFontFromMemory(const(char)* fileType, const(ubyte)* fileData, int dataSize, int fontSize, const(
+        int)* codepoints, int codepointCount);
 
 alias LoadFontFromMemory = rlLoadFontFromMemory;
 
@@ -4198,4 +4143,3 @@ pragma(mangle, "DetachAudioMixedProcessor")
 void rlDetachAudioMixedProcessor(AudioCallback processor);
 
 alias DetachAudioMixedProcessor = rlDetachAudioMixedProcessor;
-
